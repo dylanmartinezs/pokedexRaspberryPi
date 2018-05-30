@@ -35,7 +35,7 @@ public class mainWindow extends javax.swing.JFrame {
             
             state = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
-            String sql_query = ("select * from MAIN_PUCHAMONES");
+            String sql_query = ("select pokename from MAIN_PUCHAMONES");
             rs = state.executeQuery(sql_query);
             
             index = 1;
@@ -565,25 +565,25 @@ public class mainWindow extends javax.swing.JFrame {
     {
         try
         {
-        rs.absolute(index);
-        firstPokeImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mainPackage/Images/pokes/"+rs.getString("POKENAME").toLowerCase()+".png")));
-        firstPoke.setText(rs.getString("POKENAME"));
+            rs.absolute(index);
+            firstPokeImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mainPackage/Images/pokes/"+rs.getString("POKENAME").toLowerCase()+".png")));
+            firstPoke.setText(index+" - "+rs.getString("POKENAME"));
 
-        rs.absolute(index + 1);
-        secondPokeImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mainPackage/Images/pokes/"+rs.getString("POKENAME").toLowerCase()+".png")));
-        secondPoke.setText(rs.getString("POKENAME"));
-        
-        rs.absolute(index + 2);
-        thirdPokeImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mainPackage/Images/pokes/"+rs.getString("POKENAME").toLowerCase()+".png")));
-        thirdPoke.setText(rs.getString("POKENAME"));
-        
-        rs.absolute(index + 3);
-        fourthPokeImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mainPackage/Images/pokes/"+rs.getString("POKENAME").toLowerCase()+".png")));
-        fourthPoke.setText(rs.getString("POKENAME"));
-        
-        rs.absolute(index + 4);
-        fifthPokeImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mainPackage/Images/pokes/"+rs.getString("POKENAME").toLowerCase()+".png")));
-        fifthPoke.setText(rs.getString("POKENAME"));
+            rs.absolute(index + 1);
+            secondPokeImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mainPackage/Images/pokes/"+rs.getString("POKENAME").toLowerCase()+".png")));
+            secondPoke.setText((index + 1)+" - "+rs.getString("POKENAME"));
+
+            rs.absolute(index + 2);
+            thirdPokeImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mainPackage/Images/pokes/"+rs.getString("POKENAME").toLowerCase()+".png")));
+            thirdPoke.setText((index + 2)+" - "+rs.getString("POKENAME"));
+
+            rs.absolute(index + 3);
+            fourthPokeImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mainPackage/Images/pokes/"+rs.getString("POKENAME").toLowerCase()+".png")));
+            fourthPoke.setText((index + 3)+" - "+rs.getString("POKENAME"));
+
+            rs.absolute(index + 4);
+            fifthPokeImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mainPackage/Images/pokes/"+rs.getString("POKENAME").toLowerCase()+".png")));
+            fifthPoke.setText((index + 4)+" - "+rs.getString("POKENAME"));
         }
         catch(SQLException e) {System.out.println(e.getMessage());}
         
