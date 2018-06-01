@@ -69,22 +69,26 @@ public class mainWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel10 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         PokeInfoName = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jPanel20 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         PokeType1 = new javax.swing.JPanel();
         PokeTypeLabel1 = new javax.swing.JLabel();
         PokeType2 = new javax.swing.JPanel();
         PokeTypeLabel2 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        pokeNo = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jPanel19 = new javax.swing.JPanel();
+        nextPokeInfo = new javax.swing.JLabel();
+        prevPokeInfo = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
@@ -112,8 +116,11 @@ public class mainWindow extends javax.swing.JFrame {
         fifthPokeImg = new javax.swing.JLabel();
         fifthPoke = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        goUpList = new javax.swing.JLabel();
+        goDownList = new javax.swing.JLabel();
+
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("◀");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(480, 290));
@@ -133,7 +140,7 @@ public class mainWindow extends javax.swing.JFrame {
         PokeInfoName.setText("Fletchinder");
         jPanel8.add(PokeInfoName, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 27, 275, 31));
 
-        jLabel6.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Dialog", 0, 30)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("🢔");
         jPanel8.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 6, -1, 72));
@@ -142,14 +149,14 @@ public class mainWindow extends javax.swing.JFrame {
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 104, Short.MAX_VALUE)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 98, Short.MAX_VALUE)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        jPanel8.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(353, 27, -1, -1));
+        jPanel8.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, 100, 100));
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -164,18 +171,29 @@ public class mainWindow extends javax.swing.JFrame {
         jPanel20.setBackground(new java.awt.Color(73, 73, 77));
         jPanel20.setForeground(new java.awt.Color(255, 255, 255));
 
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("jLabel2");
+        jLabel2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
         javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
         jPanel20.setLayout(jPanel20Layout);
         jPanel20Layout.setHorizontalGroup(
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 415, Short.MAX_VALUE)
+            .addGroup(jPanel20Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel20Layout.setVerticalGroup(
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 108, Short.MAX_VALUE)
+            .addGroup(jPanel20Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        jPanel8.add(jPanel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 164, -1, -1));
+        jPanel8.add(jPanel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 164, 410, -1));
 
         jPanel9.setBackground(new java.awt.Color(73, 73, 77));
 
@@ -230,16 +248,18 @@ public class mainWindow extends javax.swing.JFrame {
 
         jPanel8.add(PokeType2, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 70, -1, -1));
 
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("#001");
-        jPanel8.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(353, 131, 104, 21));
+        pokeNo.setForeground(new java.awt.Color(255, 255, 255));
+        pokeNo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        pokeNo.setText("#001");
+        jPanel8.add(pokeNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 130, 60, 30));
 
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("▶");
         jPanel8.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 200, -1, -1));
 
         jLabel13.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("◀");
         jPanel8.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, -1));
 
@@ -260,11 +280,32 @@ public class mainWindow extends javax.swing.JFrame {
             .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        jPanel8.add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 50, 50));
+        jPanel8.add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 70, 50, 50));
+
+        nextPokeInfo.setForeground(new java.awt.Color(255, 255, 255));
+        nextPokeInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        nextPokeInfo.setText("▶");
+        nextPokeInfo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                nextPokeInfoMouseClicked(evt);
+            }
+        });
+        jPanel8.add(nextPokeInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 130, 20, 30));
+
+        prevPokeInfo.setForeground(new java.awt.Color(255, 255, 255));
+        prevPokeInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        prevPokeInfo.setText("◀");
+        prevPokeInfo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                prevPokeInfoMouseClicked(evt);
+            }
+        });
+        jPanel8.add(prevPokeInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 130, 20, 30));
 
         getContentPane().add(jPanel8, "card3");
 
         jPanel1.setBackground(new java.awt.Color(43, 45, 46));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(112, 193, 112));
 
@@ -326,6 +367,8 @@ public class mainWindow extends javax.swing.JFrame {
                 .addGap(16, 16, 16))
         );
 
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 296));
+
         jPanel3.setBackground(new java.awt.Color(43, 45, 46));
         jPanel3.setLayout(new java.awt.GridLayout(5, 1, 0, 6));
 
@@ -368,7 +411,7 @@ public class mainWindow extends javax.swing.JFrame {
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(firstPoke)
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -472,7 +515,7 @@ public class mainWindow extends javax.swing.JFrame {
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(thirdPoke)
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -524,7 +567,7 @@ public class mainWindow extends javax.swing.JFrame {
                 .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(fourthPoke)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -576,7 +619,7 @@ public class mainWindow extends javax.swing.JFrame {
                 .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(fifthPoke)
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
         jPanel17Layout.setVerticalGroup(
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -588,6 +631,8 @@ public class mainWindow extends javax.swing.JFrame {
         );
 
         jPanel3.add(jPanel17);
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(181, 26, 290, -1));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -602,63 +647,29 @@ public class mainWindow extends javax.swing.JFrame {
                 jLabel1MouseClicked(evt);
             }
         });
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(463, 2, -1, 16));
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("▲");
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+        goUpList.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        goUpList.setForeground(new java.awt.Color(255, 255, 255));
+        goUpList.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        goUpList.setText("▲");
+        goUpList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
+                goUpListMouseClicked(evt);
             }
         });
+        jPanel1.add(goUpList, new org.netbeans.lib.awtextra.AbsoluteConstraints(304, 6, 51, -1));
 
-        jLabel3.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("▼");
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+        goDownList.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        goDownList.setForeground(new java.awt.Color(255, 255, 255));
+        goDownList.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        goDownList.setText("▼");
+        goDownList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel3MouseClicked(evt);
+                goDownListMouseClicked(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(108, 108, 108)
-                                .addComponent(jLabel1))
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(124, 124, 124))))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(2, 2, 2)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jPanel1.add(goDownList, new org.netbeans.lib.awtextra.AbsoluteConstraints(304, 271, 51, -1));
 
         getContentPane().add(jPanel1, "card2");
 
@@ -673,19 +684,19 @@ public class mainWindow extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jLabel1MouseClicked
 
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+    private void goDownListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goDownListMouseClicked
         index = index + 5;
         setPokes(index);
-    }//GEN-LAST:event_jLabel3MouseClicked
+    }//GEN-LAST:event_goDownListMouseClicked
 
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+    private void goUpListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goUpListMouseClicked
         if(index > 1)
         {
             index = index - 5;
             setPokes(index);
         }
         
-    }//GEN-LAST:event_jLabel2MouseClicked
+    }//GEN-LAST:event_goUpListMouseClicked
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         System.exit(0);
@@ -694,6 +705,19 @@ public class mainWindow extends javax.swing.JFrame {
     private void jPanel19MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel19MouseClicked
         setPokeDesc();
     }//GEN-LAST:event_jPanel19MouseClicked
+
+    private void prevPokeInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_prevPokeInfoMouseClicked
+        if(current > 1)
+        {
+           current -= 1;
+           setPokeDesc();
+        }
+    }//GEN-LAST:event_prevPokeInfoMouseClicked
+
+    private void nextPokeInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextPokeInfoMouseClicked
+        current += 1;
+        setPokeDesc();
+    }//GEN-LAST:event_nextPokeInfoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -734,6 +758,11 @@ public class mainWindow extends javax.swing.JFrame {
     {
         try
         {
+            if(index <= 5)
+                goUpList.setVisible(false);
+            else
+                goUpList.setVisible(true);
+                
             rs.absolute(index);
             firstPokeImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mainPackage/Images/pokes/"+rs.getString("POKENAME").toLowerCase()+".png")));
             firstPoke.setText(index+" - "+rs.getString("POKENAME"));
@@ -773,8 +802,27 @@ public class mainWindow extends javax.swing.JFrame {
             }
             if(rs2.getString("Type2") != null)
             {
+                PokeType2.setVisible(true);
                 PokeTypeLabel2.setText(rs2.getString("Type2"));
             }
+            else
+            {
+                PokeType2.setVisible(false);
+            }
+            if(Integer.parseInt(rs2.getString("DEXNO")) == 1)
+            {
+                prevPokeInfo.setVisible(false);
+            }
+            else
+                prevPokeInfo.setVisible(true);
+            
+            if(Integer.parseInt(rs2.getString("DEXNO")) < 10)
+                pokeNo.setText("#00"+rs2.getString("DEXNO"));
+            else
+                if(Integer.parseInt(rs2.getString("DEXNO")) < 100)
+                    pokeNo.setText("#0"+rs2.getString("DEXNO"));
+            else
+                pokeNo.setText(rs2.getString("DEXNO"));
         }
         catch(SQLException e) {System.err.println(e.getMessage());}
     }
@@ -791,11 +839,12 @@ public class mainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel firstPokeImg;
     private javax.swing.JLabel fourthPoke;
     private javax.swing.JLabel fourthPokeImg;
+    private javax.swing.JLabel goDownList;
+    private javax.swing.JLabel goUpList;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -821,6 +870,9 @@ public class mainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JLabel nextPokeInfo;
+    private javax.swing.JLabel pokeNo;
+    private javax.swing.JLabel prevPokeInfo;
     private javax.swing.JLabel secondPoke;
     private javax.swing.JLabel secondPokeImg;
     private javax.swing.JLabel thirdPoke;
