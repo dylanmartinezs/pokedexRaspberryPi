@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package mainPackage;
+import java.util.*;
 
 import java.sql.*;
 
@@ -20,16 +21,41 @@ public class mainWindow extends javax.swing.JFrame {
     Connection conn = null;
     Statement state = null;
     Statement state2 = null;
+	Statement stateD = null;
     ResultSet rs = null;
     ResultSet rs2 = null;
+	ResultSet descs = null;
+	List<String> pokeDescs = new ArrayList<String>();
+	String[] descriptions;
     int index;
     int current = 1;
+	int currentDescription = 0;
+	boolean rotated = false;
+	boolean shiny = false;
+    java.awt.Color base = new java.awt.Color(0, 0, 0);
+    java.awt.Color grassC = new java.awt.Color(7, 127, 63);
+    java.awt.Color fireC = new java.awt.Color(242, 127, 19);
+    java.awt.Color waterC = new java.awt.Color(16, 125, 209);
+    java.awt.Color normalC = new java.awt.Color(153, 153, 153);
+    java.awt.Color fightingC = new java.awt.Color(180, 85, 64);
+    java.awt.Color flyingC = new java.awt.Color(121, 165, 255);
+    java.awt.Color electricC = new java.awt.Color(255, 207, 63);
+    java.awt.Color groundC = new java.awt.Color(206, 172, 78);
+    java.awt.Color iceC = new java.awt.Color(164, 207, 207);
+    java.awt.Color rockC = new java.awt.Color(186, 160, 46);
+    java.awt.Color psychicC = new java.awt.Color(237, 91, 139);
+    java.awt.Color ghostC = new java.awt.Color(105, 87, 136);
+    java.awt.Color darkC = new java.awt.Color(111, 88, 70);
+    java.awt.Color bugC = new java.awt.Color(167, 183, 31);
+    java.awt.Color poisonC = new java.awt.Color(149, 69, 154);
+    java.awt.Color steelC = new java.awt.Color(183, 183, 194);
+    java.awt.Color fairyC = new java.awt.Color(251, 180, 242);
+    java.awt.Color dragonC = new java.awt.Color(104, 51, 242);
+	java.awt.CardLayout cl = new java.awt.CardLayout();
     public mainWindow() {
         initComponents();
-        String poke1;
         try
         {
-            //Registrando el Driver
             String driver = "org.apache.derby.jdbc.EmbeddedDriver";
             Class.forName(driver).newInstance();
 
@@ -38,13 +64,14 @@ public class mainWindow extends javax.swing.JFrame {
             
             state = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             state2 = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			stateD = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
             String sql_query = ("select pokename from MAIN_PUCHAMONES");
             rs = state.executeQuery(sql_query);
             
             index = 1;
             
-            setPokes(index);
+            setPokes();
         }
         catch(SQLException e)
         {
@@ -58,6 +85,18 @@ public class mainWindow extends javax.swing.JFrame {
         {
             System.err.println(e.getMessage());
         }
+		dexcriptionContainer.setOpaque(false);
+		dexcriptionContainer.getViewport().setOpaque(false);
+		dexcriptionContainer.setBorder(null);
+		dexcriptionContainer.setViewportBorder(null);
+		
+		dexcription.setBorder(null);
+		dexcription.setBackground(new java.awt.Color(0,0,0,0));
+		dexcription.setWrapStyleWord(true);
+		jPanel1.setLayout(cl);
+		cl.addLayoutComponent(listViewPanel, "List view");
+		cl.addLayoutComponent(infoViewPanel, "Info view");
+		cl.show(jPanel1, "List view");
     }
 
     /**
@@ -70,26 +109,8 @@ public class mainWindow extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel10 = new javax.swing.JLabel();
-        jPanel8 = new javax.swing.JPanel();
-        PokeInfoName = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jPanel10 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        jPanel20 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jPanel9 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        PokeType1 = new javax.swing.JPanel();
-        PokeTypeLabel1 = new javax.swing.JLabel();
-        PokeType2 = new javax.swing.JPanel();
-        PokeTypeLabel2 = new javax.swing.JLabel();
-        pokeNo = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jPanel19 = new javax.swing.JPanel();
-        nextPokeInfo = new javax.swing.JLabel();
-        prevPokeInfo = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        listViewPanel = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -118,6 +139,30 @@ public class mainWindow extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         goUpList = new javax.swing.JLabel();
         goDownList = new javax.swing.JLabel();
+        infoViewPanel = new javax.swing.JPanel();
+        PokeInfoName = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jPanel10 = new javax.swing.JPanel();
+        pokeSprite = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jPanel20 = new javax.swing.JPanel();
+        dexcriptionContainer = new javax.swing.JScrollPane();
+        dexcription = new javax.swing.JTextArea();
+        jPanel9 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        PokeType1 = new javax.swing.JPanel();
+        PokeTypeLabel1 = new javax.swing.JLabel();
+        PokeType2 = new javax.swing.JPanel();
+        PokeTypeLabel2 = new javax.swing.JLabel();
+        pokeNo = new javax.swing.JLabel();
+        nextDesc = new javax.swing.JLabel();
+        prevDesc = new javax.swing.JLabel();
+        jPanel19 = new javax.swing.JPanel();
+        pokeShape = new javax.swing.JLabel();
+        nextPokeInfo = new javax.swing.JLabel();
+        prevPokeInfo = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("◀");
@@ -126,186 +171,13 @@ public class mainWindow extends javax.swing.JFrame {
         setMaximumSize(new java.awt.Dimension(480, 290));
         setMinimumSize(new java.awt.Dimension(480, 290));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(480, 290));
         setResizable(false);
-        getContentPane().setLayout(new java.awt.CardLayout());
 
-        jPanel8.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel8.setEnabled(false);
-        jPanel8.setFocusable(false);
-        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.setPreferredSize(new java.awt.Dimension(480, 290));
+        jPanel1.setLayout(new java.awt.CardLayout());
 
-        PokeInfoName.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        PokeInfoName.setForeground(new java.awt.Color(255, 255, 255));
-        PokeInfoName.setText("Fletchinder");
-        jPanel8.add(PokeInfoName, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 27, 275, 31));
-
-        jLabel6.setFont(new java.awt.Font("Dialog", 0, 30)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("🢔");
-        jPanel8.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 6, -1, 72));
-
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        jPanel8.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, 100, 100));
-
-        jLabel7.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("x");
-        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel7MouseClicked(evt);
-            }
-        });
-        jPanel8.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(462, 6, -1, 14));
-
-        jPanel20.setBackground(new java.awt.Color(73, 73, 77));
-        jPanel20.setForeground(new java.awt.Color(255, 255, 255));
-
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("jLabel2");
-        jLabel2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-
-        javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
-        jPanel20.setLayout(jPanel20Layout);
-        jPanel20Layout.setHorizontalGroup(
-            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel20Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel20Layout.setVerticalGroup(
-            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel20Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        jPanel8.add(jPanel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 164, 410, -1));
-
-        jPanel9.setBackground(new java.awt.Color(73, 73, 77));
-
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("jLabel8");
-
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE))
-        );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
-        );
-
-        jPanel8.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 143, -1, 20));
-
-        PokeTypeLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        PokeTypeLabel1.setText("Type 1");
-        PokeTypeLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        javax.swing.GroupLayout PokeType1Layout = new javax.swing.GroupLayout(PokeType1);
-        PokeType1.setLayout(PokeType1Layout);
-        PokeType1Layout.setHorizontalGroup(
-            PokeType1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PokeTypeLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
-        );
-        PokeType1Layout.setVerticalGroup(
-            PokeType1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PokeTypeLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
-        );
-
-        jPanel8.add(PokeType1, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 70, -1, -1));
-
-        PokeTypeLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        PokeTypeLabel2.setText("Type 2");
-
-        javax.swing.GroupLayout PokeType2Layout = new javax.swing.GroupLayout(PokeType2);
-        PokeType2.setLayout(PokeType2Layout);
-        PokeType2Layout.setHorizontalGroup(
-            PokeType2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PokeTypeLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
-        );
-        PokeType2Layout.setVerticalGroup(
-            PokeType2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PokeTypeLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
-        );
-
-        jPanel8.add(PokeType2, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 70, -1, -1));
-
-        pokeNo.setForeground(new java.awt.Color(255, 255, 255));
-        pokeNo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        pokeNo.setText("#001");
-        jPanel8.add(pokeNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 130, 60, 30));
-
-        jLabel9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("▶");
-        jPanel8.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 200, -1, -1));
-
-        jLabel13.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("◀");
-        jPanel8.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, -1));
-
-        jPanel19.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel19MouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
-        jPanel19.setLayout(jPanel19Layout);
-        jPanel19Layout.setHorizontalGroup(
-            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-        );
-        jPanel19Layout.setVerticalGroup(
-            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-        );
-
-        jPanel8.add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 70, 50, 50));
-
-        nextPokeInfo.setForeground(new java.awt.Color(255, 255, 255));
-        nextPokeInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        nextPokeInfo.setText("▶");
-        nextPokeInfo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                nextPokeInfoMouseClicked(evt);
-            }
-        });
-        jPanel8.add(nextPokeInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 130, 20, 30));
-
-        prevPokeInfo.setForeground(new java.awt.Color(255, 255, 255));
-        prevPokeInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        prevPokeInfo.setText("◀");
-        prevPokeInfo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                prevPokeInfoMouseClicked(evt);
-            }
-        });
-        jPanel8.add(prevPokeInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 130, 20, 30));
-
-        getContentPane().add(jPanel8, "card3");
-
-        jPanel1.setBackground(new java.awt.Color(43, 45, 46));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        listViewPanel.setBackground(new java.awt.Color(43, 45, 46));
+        listViewPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(112, 193, 112));
 
@@ -367,12 +239,17 @@ public class mainWindow extends javax.swing.JFrame {
                 .addGap(16, 16, 16))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 296));
+        listViewPanel.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 296));
 
         jPanel3.setBackground(new java.awt.Color(43, 45, 46));
         jPanel3.setLayout(new java.awt.GridLayout(5, 1, 0, 6));
 
         jPanel5.setBackground(new java.awt.Color(61, 62, 66));
+        jPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel5MouseClicked(evt);
+            }
+        });
 
         jPanel11.setBackground(new java.awt.Color(51, 153, 255));
 
@@ -425,6 +302,11 @@ public class mainWindow extends javax.swing.JFrame {
         jPanel3.add(jPanel5);
 
         jPanel6.setBackground(new java.awt.Color(61, 62, 66));
+        jPanel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel6MouseClicked(evt);
+            }
+        });
 
         jPanel12.setBackground(new java.awt.Color(51, 153, 255));
 
@@ -477,6 +359,11 @@ public class mainWindow extends javax.swing.JFrame {
         jPanel3.add(jPanel6);
 
         jPanel13.setBackground(new java.awt.Color(61, 62, 66));
+        jPanel13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel13MouseClicked(evt);
+            }
+        });
 
         jPanel14.setBackground(new java.awt.Color(51, 153, 255));
 
@@ -529,6 +416,11 @@ public class mainWindow extends javax.swing.JFrame {
         jPanel3.add(jPanel13);
 
         jPanel15.setBackground(new java.awt.Color(61, 62, 66));
+        jPanel15.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel15MouseClicked(evt);
+            }
+        });
 
         jPanel16.setBackground(new java.awt.Color(51, 153, 255));
 
@@ -581,6 +473,11 @@ public class mainWindow extends javax.swing.JFrame {
         jPanel3.add(jPanel15);
 
         jPanel17.setBackground(new java.awt.Color(61, 62, 66));
+        jPanel17.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel17MouseClicked(evt);
+            }
+        });
 
         jPanel18.setBackground(new java.awt.Color(51, 153, 255));
 
@@ -632,10 +529,11 @@ public class mainWindow extends javax.swing.JFrame {
 
         jPanel3.add(jPanel17);
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(181, 26, 290, -1));
+        listViewPanel.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(181, 26, 290, -1));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("x");
         jLabel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -647,7 +545,7 @@ public class mainWindow extends javax.swing.JFrame {
                 jLabel1MouseClicked(evt);
             }
         });
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(463, 2, -1, 16));
+        listViewPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 0, 20, 20));
 
         goUpList.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         goUpList.setForeground(new java.awt.Color(255, 255, 255));
@@ -658,7 +556,7 @@ public class mainWindow extends javax.swing.JFrame {
                 goUpListMouseClicked(evt);
             }
         });
-        jPanel1.add(goUpList, new org.netbeans.lib.awtextra.AbsoluteConstraints(304, 6, 51, -1));
+        listViewPanel.add(goUpList, new org.netbeans.lib.awtextra.AbsoluteConstraints(304, 6, 51, -1));
 
         goDownList.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         goDownList.setForeground(new java.awt.Color(255, 255, 255));
@@ -669,9 +567,258 @@ public class mainWindow extends javax.swing.JFrame {
                 goDownListMouseClicked(evt);
             }
         });
-        jPanel1.add(goDownList, new org.netbeans.lib.awtextra.AbsoluteConstraints(304, 271, 51, -1));
+        listViewPanel.add(goDownList, new org.netbeans.lib.awtextra.AbsoluteConstraints(304, 271, 51, -1));
 
-        getContentPane().add(jPanel1, "card2");
+        jPanel1.add(listViewPanel, "card2");
+
+        infoViewPanel.setBackground(new java.awt.Color(51, 51, 51));
+        infoViewPanel.setEnabled(false);
+        infoViewPanel.setFocusable(false);
+        infoViewPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        PokeInfoName.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        PokeInfoName.setForeground(new java.awt.Color(255, 255, 255));
+        PokeInfoName.setText("Fletchinder");
+        infoViewPanel.add(PokeInfoName, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 275, 31));
+
+        jLabel6.setFont(new java.awt.Font("Dialog", 0, 30)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("🢔");
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
+        infoViewPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 30, 30));
+
+        jPanel10.setBackground(new java.awt.Color(51, 153, 255));
+
+        pokeSprite.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        pokeSprite.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mainPackage/Images/sprites/63.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pokeSprite, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pokeSprite, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+        );
+
+        infoViewPanel.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, 100, 100));
+
+        jLabel7.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("x");
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+        });
+        infoViewPanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 0, 20, 20));
+
+        jPanel20.setBackground(new java.awt.Color(73, 73, 77));
+        jPanel20.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel20.setPreferredSize(new java.awt.Dimension(470, 108));
+
+        dexcriptionContainer.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        dexcriptionContainer.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        dexcriptionContainer.setFocusable(false);
+        dexcriptionContainer.setWheelScrollingEnabled(false);
+
+        dexcription.setEditable(false);
+        dexcription.setColumns(20);
+        dexcription.setFont(new java.awt.Font("Dialog", 0, 22)); // NOI18N
+        dexcription.setForeground(new java.awt.Color(255, 255, 255));
+        dexcription.setLineWrap(true);
+        dexcription.setRows(5);
+        dexcription.setFocusable(false);
+        dexcription.setOpaque(false);
+        dexcriptionContainer.setViewportView(dexcription);
+
+        javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
+        jPanel20.setLayout(jPanel20Layout);
+        jPanel20Layout.setHorizontalGroup(
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel20Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(dexcriptionContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel20Layout.setVerticalGroup(
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel20Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(dexcriptionContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        infoViewPanel.add(jPanel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 164, 410, -1));
+
+        jPanel9.setBackground(new java.awt.Color(73, 73, 77));
+
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("jLabel8");
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
+        );
+
+        infoViewPanel.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 143, -1, 20));
+
+        PokeTypeLabel1.setBackground(new java.awt.Color(247, 247, 247));
+        PokeTypeLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        PokeTypeLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        PokeTypeLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        PokeTypeLabel1.setText("Type 1");
+        PokeTypeLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout PokeType1Layout = new javax.swing.GroupLayout(PokeType1);
+        PokeType1.setLayout(PokeType1Layout);
+        PokeType1Layout.setHorizontalGroup(
+            PokeType1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(PokeTypeLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
+        );
+        PokeType1Layout.setVerticalGroup(
+            PokeType1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(PokeTypeLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+        );
+
+        infoViewPanel.add(PokeType1, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 70, -1, -1));
+
+        PokeTypeLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        PokeTypeLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        PokeTypeLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        PokeTypeLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        PokeTypeLabel2.setText("Type 2");
+
+        javax.swing.GroupLayout PokeType2Layout = new javax.swing.GroupLayout(PokeType2);
+        PokeType2.setLayout(PokeType2Layout);
+        PokeType2Layout.setHorizontalGroup(
+            PokeType2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(PokeTypeLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
+        );
+        PokeType2Layout.setVerticalGroup(
+            PokeType2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(PokeTypeLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+        );
+
+        infoViewPanel.add(PokeType2, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 70, -1, -1));
+
+        pokeNo.setForeground(new java.awt.Color(255, 255, 255));
+        pokeNo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        pokeNo.setText("#001");
+        infoViewPanel.add(pokeNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 130, 60, 30));
+
+        nextDesc.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        nextDesc.setForeground(new java.awt.Color(255, 255, 255));
+        nextDesc.setText("▶");
+        nextDesc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                nextDescMouseClicked(evt);
+            }
+        });
+        infoViewPanel.add(nextDesc, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 210, -1, -1));
+
+        prevDesc.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        prevDesc.setForeground(new java.awt.Color(255, 255, 255));
+        prevDesc.setText("◀");
+        prevDesc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                prevDescMouseClicked(evt);
+            }
+        });
+        infoViewPanel.add(prevDesc, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, -1));
+
+        jPanel19.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel19.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel19MouseClicked(evt);
+            }
+        });
+
+        pokeShape.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
+        jPanel19.setLayout(jPanel19Layout);
+        jPanel19Layout.setHorizontalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pokeShape, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
+        jPanel19Layout.setVerticalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pokeShape, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
+
+        infoViewPanel.add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, 40, 40));
+
+        nextPokeInfo.setForeground(new java.awt.Color(255, 255, 255));
+        nextPokeInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        nextPokeInfo.setText("▶");
+        nextPokeInfo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                nextPokeInfoMouseClicked(evt);
+            }
+        });
+        infoViewPanel.add(nextPokeInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 130, 30, 30));
+
+        prevPokeInfo.setForeground(new java.awt.Color(255, 255, 255));
+        prevPokeInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        prevPokeInfo.setText("◀");
+        prevPokeInfo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                prevPokeInfoMouseClicked(evt);
+            }
+        });
+        infoViewPanel.add(prevPokeInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 130, 30, 30));
+
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 22)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("🟊");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+        infoViewPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 60, 40, 20));
+
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 22)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("⟲");
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
+        infoViewPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 30, 40, 20));
+
+        jPanel1.add(infoViewPanel, "card3");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -686,14 +833,14 @@ public class mainWindow extends javax.swing.JFrame {
 
     private void goDownListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goDownListMouseClicked
         index = index + 5;
-        setPokes(index);
+        setPokes();
     }//GEN-LAST:event_goDownListMouseClicked
 
     private void goUpListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goUpListMouseClicked
         if(index > 1)
         {
             index = index - 5;
-            setPokes(index);
+            setPokes();
         }
         
     }//GEN-LAST:event_goUpListMouseClicked
@@ -718,6 +865,91 @@ public class mainWindow extends javax.swing.JFrame {
         current += 1;
         setPokeDesc();
     }//GEN-LAST:event_nextPokeInfoMouseClicked
+
+    private void nextDescMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextDescMouseClicked
+        currentDescription += 1;
+		if(currentDescription == (descriptions.length - 1))
+			nextDesc.setVisible(false);
+		if(currentDescription > 0)
+			prevDesc.setVisible(true);
+		dexcription.setText(descriptions[currentDescription]);
+    }//GEN-LAST:event_nextDescMouseClicked
+
+    private void prevDescMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_prevDescMouseClicked
+        currentDescription -= 1;
+		if(currentDescription == 0)
+			prevDesc.setVisible(false);
+		nextDesc.setVisible(true);
+		dexcription.setText(descriptions[currentDescription]);
+    }//GEN-LAST:event_prevDescMouseClicked
+
+    private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
+        current = index;
+		setPokeDesc();
+		cl.show(jPanel1, "Info view");
+    }//GEN-LAST:event_jPanel5MouseClicked
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        cl.show(jPanel1, "List view");
+    }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
+        current = index + 1;
+		setPokeDesc();
+		cl.show(jPanel1, "Info view");
+    }//GEN-LAST:event_jPanel6MouseClicked
+
+    private void jPanel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel13MouseClicked
+        current = index + 2;
+		setPokeDesc();
+		cl.show(jPanel1, "Info view");
+    }//GEN-LAST:event_jPanel13MouseClicked
+
+    private void jPanel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel15MouseClicked
+        current = index + 3;
+		setPokeDesc();
+		cl.show(jPanel1, "Info view");
+    }//GEN-LAST:event_jPanel15MouseClicked
+
+    private void jPanel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel17MouseClicked
+        current = index + 4;
+		setPokeDesc();
+		cl.show(jPanel1, "Info view");
+    }//GEN-LAST:event_jPanel17MouseClicked
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        rotated = !rotated;
+		try
+		{
+			if(rotated)
+				if(shiny)
+					pokeSprite.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mainPackage/Images/sprites/"+Integer.parseInt(rs2.getString("DEXNO"))+"sb.png")));
+				else
+					pokeSprite.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mainPackage/Images/sprites/"+Integer.parseInt(rs2.getString("DEXNO"))+"b.png")));
+			else if(shiny)
+					pokeSprite.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mainPackage/Images/sprites/"+Integer.parseInt(rs2.getString("DEXNO"))+"s.png")));
+				else
+					pokeSprite.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mainPackage/Images/sprites/"+Integer.parseInt(rs2.getString("DEXNO"))+".png")));
+		}
+		catch(SQLException e) {System.err.println(e.getMessage());}
+    }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        shiny = !shiny;
+		try
+		{
+			if(shiny)
+				if(rotated)
+					pokeSprite.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mainPackage/Images/sprites/"+Integer.parseInt(rs2.getString("DEXNO"))+"sb.png")));
+				else
+					pokeSprite.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mainPackage/Images/sprites/"+Integer.parseInt(rs2.getString("DEXNO"))+"s.png")));
+			else if(rotated)
+					pokeSprite.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mainPackage/Images/sprites/"+Integer.parseInt(rs2.getString("DEXNO"))+"b.png")));
+				else
+					pokeSprite.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mainPackage/Images/sprites/"+Integer.parseInt(rs2.getString("DEXNO"))+".png")));
+		}
+		catch(SQLException e) {System.err.println(e.getMessage());}
+    }//GEN-LAST:event_jLabel2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -754,7 +986,7 @@ public class mainWindow extends javax.swing.JFrame {
         });
     }
     
-    public void setPokes(int i)
+    public void setPokes()
     {
         try
         {
@@ -790,20 +1022,192 @@ public class mainWindow extends javax.swing.JFrame {
     {
         try
         {
-            String sql = "select * from main_puchamones where dexno = "+current;
-            rs2 = state2.executeQuery(sql);
+            String pokeInfoSQL = "select dexno, pokename, height, weight, type1, type2, bodyshape from main_puchamones where dexno = "+current;
+			String pokeDescsSQL = "select pokedescriptionrb, pokedescriptiongold, pokedescriptionsilver, pokedescriptioncrystal, pokedescriptionruby, pokedescriptionsaphire, pokedescriptionemerald, pokedescriptiondiamond, pokedescriptionpearl, pokedescriptionplatinum, pokedescriptionhg, pokedescriptionss, pokedescriptionwhite, pokedescriptionblack, pokedescriptionw2, pokedescriptionx, pokedescriptiony, pokedescriptionor, pokedescriptionas, POKEDESCRIPTIONSUN, pokedescriptionmoon, pokedescriptionus, pokedescriptionum from main_puchamones where dexno = "+current;
+            rs2 = state2.executeQuery(pokeInfoSQL);
             rs2.first();
+			pokeDescs.clear();
+			descs = stateD.executeQuery(pokeDescsSQL);
+			descs.first();
+			
+			for(int i = 1; i <= 23; i++)
+				if(descs.getString(i) != null)
+					pokeDescs.add(descs.getString(i));
+				
+			descriptions = pokeDescs.toArray(new String[0]);
+			
+			rotated = shiny = false;
+			
+			currentDescription = 0;
+			prevDesc.setVisible(false);
+			
+			if(currentDescription < (descriptions.length - 1))
+				nextDesc.setVisible(true);
+			else
+				nextDesc.setVisible(false);
+			
+			if(descriptions[currentDescription] != null)
+				dexcription.setText(descriptions[currentDescription]);
+			
+			pokeSprite.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mainPackage/Images/sprites/"+Integer.parseInt(rs2.getString("DEXNO"))+".png")));
+			
+			if(Integer.parseInt(rs2.getString("bodyshape")) < 10)
+				pokeShape.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mainPackage/Images/shapes/Body0"+rs2.getString("bodyshape").toLowerCase()+".png")));
+								
             PokeInfoName.setText(rs2.getString("POKENAME"));
-            PokeTypeLabel1.setText(rs2.getString("Type1"));
-            switch(rs2.getString("Type1"))
+            PokeTypeLabel1.setText(rs2.getString("Type1")); 
+            switch(rs2.getString("Type1").toLowerCase())
             {
-                case "Grass":
-                    PokeType1.setBackground(new java.awt.Color(7, 127, 63));
+                case "grass":
+                    PokeType1.setBackground(grassC);
+				break;
+
+				case "fire":
+					PokeType1.setBackground(fireC);
+					break;
+
+				case "water":
+					PokeType1.setBackground(waterC);
+					break;
+
+				case "normal":
+					PokeType1.setBackground(normalC);
+					break;
+
+				case "fighting":
+					PokeType1.setBackground(fightingC);
+					break;
+				
+				case "flying":
+					PokeType1.setBackground(flyingC);
+					break;
+					
+				case "electric":
+					PokeType1.setBackground(electricC);
+					break;
+				
+				case "ground":
+					PokeType1.setBackground(groundC);
+					break;
+				
+				case "ice":
+					PokeType1.setBackground(iceC);
+					break;
+				
+				case "rock":
+					PokeType1.setBackground(rockC);
+					break;
+				
+				case "psychic":
+					PokeType1.setBackground(psychicC);
+					break;
+				
+				case "ghost":
+					PokeType1.setBackground(ghostC);
+					break;
+					
+				case "dark":
+					PokeType1.setBackground(darkC);
+					break;
+					
+				case "bug":
+					PokeType1.setBackground(bugC);
+					break;
+				
+				case "poison":
+					PokeType1.setBackground(poisonC);
+					break;
+					
+				case "steel":
+					PokeType1.setBackground(steelC);
+					break;
+					
+				case "fairy":
+					PokeType1.setBackground(fairyC);
+					break;
+					
+				case "dragon":
+					PokeType1.setBackground(dragonC);
+					break;
             }
             if(rs2.getString("Type2") != null)
             {
                 PokeType2.setVisible(true);
                 PokeTypeLabel2.setText(rs2.getString("Type2"));
+				switch(rs2.getString("Type2").toLowerCase())
+				{
+					case "grass":
+						PokeType2.setBackground(grassC);
+					break;
+
+					case "fire":
+						PokeType2.setBackground(fireC);
+						break;
+
+					case "water":
+						PokeType2.setBackground(waterC);
+						break;
+
+					case "normal":
+						PokeType2.setBackground(normalC);
+						break;
+
+					case "fighting":
+						PokeType2.setBackground(fightingC);
+						break;
+
+					case "flying":
+						PokeType2.setBackground(flyingC);
+						break;
+
+					case "electric":
+						PokeType2.setBackground(electricC);
+						break;
+
+					case "ground":
+						PokeType2.setBackground(groundC);
+						break;
+
+					case "ice":
+						PokeType2.setBackground(iceC);
+						break;
+
+					case "rock":
+						PokeType2.setBackground(rockC);
+						break;
+
+					case "psychic":
+						PokeType2.setBackground(psychicC);
+						break;
+
+					case "ghost":
+						PokeType2.setBackground(ghostC);
+						break;
+
+					case "dark":
+						PokeType2.setBackground(darkC);
+						break;
+
+					case "bug":
+						PokeType2.setBackground(bugC);
+						break;
+
+					case "poison":
+						PokeType2.setBackground(poisonC);
+						break;
+
+					case "steel":
+						PokeType2.setBackground(steelC);
+						break;
+
+					case "fairy":
+						PokeType2.setBackground(fairyC);
+						break;
+
+					case "dragon":
+						PokeType2.setBackground(dragonC);
+						break;
+				}
             }
             else
             {
@@ -826,6 +1230,10 @@ public class mainWindow extends javax.swing.JFrame {
         }
         catch(SQLException e) {System.err.println(e.getMessage());}
     }
+	public void setDescriptions()
+	{
+		dexcription.setText(descriptions[currentDescription]);
+	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel PokeInfoName;
@@ -833,6 +1241,8 @@ public class mainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel PokeType2;
     private javax.swing.JLabel PokeTypeLabel1;
     private javax.swing.JLabel PokeTypeLabel2;
+    private javax.swing.JTextArea dexcription;
+    private javax.swing.JScrollPane dexcriptionContainer;
     private javax.swing.JLabel fifthPoke;
     private javax.swing.JLabel fifthPokeImg;
     private javax.swing.JLabel firstPoke;
@@ -841,15 +1251,15 @@ public class mainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel fourthPokeImg;
     private javax.swing.JLabel goDownList;
     private javax.swing.JLabel goUpList;
+    private javax.swing.JPanel infoViewPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -868,10 +1278,14 @@ public class mainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JPanel listViewPanel;
+    private javax.swing.JLabel nextDesc;
     private javax.swing.JLabel nextPokeInfo;
     private javax.swing.JLabel pokeNo;
+    private javax.swing.JLabel pokeShape;
+    private javax.swing.JLabel pokeSprite;
+    private javax.swing.JLabel prevDesc;
     private javax.swing.JLabel prevPokeInfo;
     private javax.swing.JLabel secondPoke;
     private javax.swing.JLabel secondPokeImg;

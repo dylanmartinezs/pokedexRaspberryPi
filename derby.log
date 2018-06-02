@@ -1,13 +1,13 @@
 ----------------------------------------------------------------
-Fri Jun 01 11:44:53 CEST 2018:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0163-babc-5055-000002e1d5d0 
-on database directory /home/rataman/Documents/Git/pokedexRaspberryPi/pokemon with class loader sun.misc.Launcher$AppClassLoader@5e2de80c 
-Loaded from file:/usr/lib/jvm/java-10-jdk/db/lib/derby.jar
+Sat Jun 02 23:43:02 CEST 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-0163-c274-2992-00000a6ad6b0 
+on database directory C:\Users\Dylan\Documents\Git\pokedexRaspberryPi\pokemon with class loader sun.misc.Launcher$AppClassLoader@1d44bcfa 
+Loaded from file:/C:/Program%20Files/Java/jdk1.8.0_171/db/lib/derby.jar
 java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_172-b11
-user.dir=/home/rataman/Documents/Git/pokedexRaspberryPi
-os.name=Linux
+java.runtime.version=1.8.0_171-b11
+user.dir=C:\Users\Dylan\Documents\Git\pokedexRaspberryPi
+os.name=Windows 10
 os.arch=amd64
-os.version=4.16.8-1-ARCH
+os.version=10.0
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
