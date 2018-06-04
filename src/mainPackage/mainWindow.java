@@ -32,6 +32,7 @@ public class mainWindow extends javax.swing.JFrame {
 	int currentDescription = 0;
 	boolean rotated = false;
 	boolean shiny = false;
+	int c;
     java.awt.Color base = new java.awt.Color(0, 0, 0);
     java.awt.Color grassC = new java.awt.Color(7, 127, 63);
     java.awt.Color fireC = new java.awt.Color(242, 127, 19);
@@ -116,23 +117,23 @@ public class mainWindow extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
+        poke1 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         firstPokeImg = new javax.swing.JLabel();
         firstPoke = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
+        poke2 = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
         secondPokeImg = new javax.swing.JLabel();
         secondPoke = new javax.swing.JLabel();
-        jPanel13 = new javax.swing.JPanel();
+        poke3 = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
         thirdPokeImg = new javax.swing.JLabel();
         thirdPoke = new javax.swing.JLabel();
-        jPanel15 = new javax.swing.JPanel();
+        poke4 = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
         fourthPokeImg = new javax.swing.JLabel();
         fourthPoke = new javax.swing.JLabel();
-        jPanel17 = new javax.swing.JPanel();
+        poke5 = new javax.swing.JPanel();
         jPanel18 = new javax.swing.JPanel();
         fifthPokeImg = new javax.swing.JLabel();
         fifthPoke = new javax.swing.JLabel();
@@ -141,7 +142,7 @@ public class mainWindow extends javax.swing.JFrame {
         goDownList = new javax.swing.JLabel();
         infoViewPanel = new javax.swing.JPanel();
         PokeInfoName = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        backToInfo = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         pokeSprite = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -149,7 +150,7 @@ public class mainWindow extends javax.swing.JFrame {
         dexcriptionContainer = new javax.swing.JScrollPane();
         dexcription = new javax.swing.JTextArea();
         jPanel9 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
+        regionDex = new javax.swing.JLabel();
         PokeType1 = new javax.swing.JPanel();
         PokeTypeLabel1 = new javax.swing.JLabel();
         PokeType2 = new javax.swing.JPanel();
@@ -161,8 +162,8 @@ public class mainWindow extends javax.swing.JFrame {
         pokeShape = new javax.swing.JLabel();
         nextPokeInfo = new javax.swing.JLabel();
         prevPokeInfo = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        shinyBtn = new javax.swing.JLabel();
+        rotateBtn = new javax.swing.JLabel();
 
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("◀");
@@ -244,10 +245,10 @@ public class mainWindow extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(43, 45, 46));
         jPanel3.setLayout(new java.awt.GridLayout(5, 1, 0, 6));
 
-        jPanel5.setBackground(new java.awt.Color(61, 62, 66));
-        jPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
+        poke1.setBackground(new java.awt.Color(61, 62, 66));
+        poke1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel5MouseClicked(evt);
+                poke1MouseClicked(evt);
             }
         });
 
@@ -280,31 +281,31 @@ public class mainWindow extends javax.swing.JFrame {
         firstPoke.setForeground(new java.awt.Color(255, 255, 255));
         firstPoke.setText("First Pokémon");
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        javax.swing.GroupLayout poke1Layout = new javax.swing.GroupLayout(poke1);
+        poke1.setLayout(poke1Layout);
+        poke1Layout.setHorizontalGroup(
+            poke1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(poke1Layout.createSequentialGroup()
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(firstPoke)
                 .addContainerGap(68, Short.MAX_VALUE))
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+        poke1Layout.setVerticalGroup(
+            poke1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, poke1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(firstPoke, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addComponent(jPanel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jPanel3.add(jPanel5);
+        jPanel3.add(poke1);
 
-        jPanel6.setBackground(new java.awt.Color(61, 62, 66));
-        jPanel6.addMouseListener(new java.awt.event.MouseAdapter() {
+        poke2.setBackground(new java.awt.Color(61, 62, 66));
+        poke2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel6MouseClicked(evt);
+                poke2MouseClicked(evt);
             }
         });
 
@@ -337,31 +338,31 @@ public class mainWindow extends javax.swing.JFrame {
         secondPoke.setForeground(new java.awt.Color(255, 255, 255));
         secondPoke.setText("Second Pokémon");
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+        javax.swing.GroupLayout poke2Layout = new javax.swing.GroupLayout(poke2);
+        poke2.setLayout(poke2Layout);
+        poke2Layout.setHorizontalGroup(
+            poke2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(poke2Layout.createSequentialGroup()
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(secondPoke)
                 .addContainerGap())
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        poke2Layout.setVerticalGroup(
+            poke2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+            .addGroup(poke2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(secondPoke, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jPanel3.add(jPanel6);
+        jPanel3.add(poke2);
 
-        jPanel13.setBackground(new java.awt.Color(61, 62, 66));
-        jPanel13.addMouseListener(new java.awt.event.MouseAdapter() {
+        poke3.setBackground(new java.awt.Color(61, 62, 66));
+        poke3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel13MouseClicked(evt);
+                poke3MouseClicked(evt);
             }
         });
 
@@ -394,31 +395,31 @@ public class mainWindow extends javax.swing.JFrame {
         thirdPoke.setForeground(new java.awt.Color(255, 255, 255));
         thirdPoke.setText("Third Pokémon");
 
-        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
-        jPanel13.setLayout(jPanel13Layout);
-        jPanel13Layout.setHorizontalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+        javax.swing.GroupLayout poke3Layout = new javax.swing.GroupLayout(poke3);
+        poke3.setLayout(poke3Layout);
+        poke3Layout.setHorizontalGroup(
+            poke3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, poke3Layout.createSequentialGroup()
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(thirdPoke)
                 .addContainerGap(60, Short.MAX_VALUE))
         );
-        jPanel13Layout.setVerticalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
+        poke3Layout.setVerticalGroup(
+            poke3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(poke3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(thirdPoke, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addComponent(jPanel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jPanel3.add(jPanel13);
+        jPanel3.add(poke3);
 
-        jPanel15.setBackground(new java.awt.Color(61, 62, 66));
-        jPanel15.addMouseListener(new java.awt.event.MouseAdapter() {
+        poke4.setBackground(new java.awt.Color(61, 62, 66));
+        poke4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel15MouseClicked(evt);
+                poke4MouseClicked(evt);
             }
         });
 
@@ -451,31 +452,31 @@ public class mainWindow extends javax.swing.JFrame {
         fourthPoke.setForeground(new java.awt.Color(255, 255, 255));
         fourthPoke.setText("Fourth Pokémon");
 
-        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
-        jPanel15.setLayout(jPanel15Layout);
-        jPanel15Layout.setHorizontalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
+        javax.swing.GroupLayout poke4Layout = new javax.swing.GroupLayout(poke4);
+        poke4.setLayout(poke4Layout);
+        poke4Layout.setHorizontalGroup(
+            poke4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, poke4Layout.createSequentialGroup()
                 .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(fourthPoke)
                 .addContainerGap(46, Short.MAX_VALUE))
         );
-        jPanel15Layout.setVerticalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel15Layout.createSequentialGroup()
+        poke4Layout.setVerticalGroup(
+            poke4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(poke4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(fourthPoke, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addComponent(jPanel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jPanel3.add(jPanel15);
+        jPanel3.add(poke4);
 
-        jPanel17.setBackground(new java.awt.Color(61, 62, 66));
-        jPanel17.addMouseListener(new java.awt.event.MouseAdapter() {
+        poke5.setBackground(new java.awt.Color(61, 62, 66));
+        poke5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel17MouseClicked(evt);
+                poke5MouseClicked(evt);
             }
         });
 
@@ -508,26 +509,26 @@ public class mainWindow extends javax.swing.JFrame {
         fifthPoke.setForeground(new java.awt.Color(255, 255, 255));
         fifthPoke.setText("Fifth Pokémon");
 
-        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
-        jPanel17.setLayout(jPanel17Layout);
-        jPanel17Layout.setHorizontalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
+        javax.swing.GroupLayout poke5Layout = new javax.swing.GroupLayout(poke5);
+        poke5.setLayout(poke5Layout);
+        poke5Layout.setHorizontalGroup(
+            poke5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, poke5Layout.createSequentialGroup()
                 .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(fifthPoke)
                 .addContainerGap(66, Short.MAX_VALUE))
         );
-        jPanel17Layout.setVerticalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        poke5Layout.setVerticalGroup(
+            poke5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel18, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, poke5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(fifthPoke, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jPanel3.add(jPanel17);
+        jPanel3.add(poke5);
 
         listViewPanel.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(181, 26, 290, -1));
 
@@ -581,16 +582,16 @@ public class mainWindow extends javax.swing.JFrame {
         PokeInfoName.setText("Fletchinder");
         infoViewPanel.add(PokeInfoName, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 275, 31));
 
-        jLabel6.setFont(new java.awt.Font("Dialog", 0, 30)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("🢔");
-        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+        backToInfo.setFont(new java.awt.Font("Dialog", 0, 30)); // NOI18N
+        backToInfo.setForeground(new java.awt.Color(255, 255, 255));
+        backToInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        backToInfo.setText("🢔");
+        backToInfo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel6MouseClicked(evt);
+                backToInfoMouseClicked(evt);
             }
         });
-        infoViewPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 30, 30));
+        infoViewPanel.add(backToInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 30, 30));
 
         jPanel10.setBackground(new java.awt.Color(51, 153, 255));
 
@@ -661,8 +662,8 @@ public class mainWindow extends javax.swing.JFrame {
 
         jPanel9.setBackground(new java.awt.Color(73, 73, 77));
 
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("jLabel8");
+        regionDex.setForeground(new java.awt.Color(255, 255, 255));
+        regionDex.setText("jLabel8");
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -670,11 +671,11 @@ public class mainWindow extends javax.swing.JFrame {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE))
+                .addComponent(regionDex, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
+            .addComponent(regionDex, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
         );
 
         infoViewPanel.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 143, -1, 20));
@@ -785,27 +786,27 @@ public class mainWindow extends javax.swing.JFrame {
         });
         infoViewPanel.add(prevPokeInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 130, 30, 30));
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 22)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("🟊");
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+        shinyBtn.setFont(new java.awt.Font("Dialog", 1, 22)); // NOI18N
+        shinyBtn.setForeground(new java.awt.Color(255, 255, 255));
+        shinyBtn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        shinyBtn.setText("🟊");
+        shinyBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
+                shinyBtnMouseClicked(evt);
             }
         });
-        infoViewPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 60, 40, 20));
+        infoViewPanel.add(shinyBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 60, 40, 20));
 
-        jLabel3.setFont(new java.awt.Font("Dialog", 1, 22)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("⟲");
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+        rotateBtn.setFont(new java.awt.Font("Dialog", 1, 22)); // NOI18N
+        rotateBtn.setForeground(new java.awt.Color(255, 255, 255));
+        rotateBtn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        rotateBtn.setText("⟲");
+        rotateBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel3MouseClicked(evt);
+                rotateBtnMouseClicked(evt);
             }
         });
-        infoViewPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 30, 40, 20));
+        infoViewPanel.add(rotateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 30, 40, 20));
 
         jPanel1.add(infoViewPanel, "card3");
 
@@ -867,57 +868,60 @@ public class mainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_nextPokeInfoMouseClicked
 
     private void nextDescMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextDescMouseClicked
-        currentDescription += 1;
+        c++;
+		currentDescription += 1;
 		if(currentDescription == (descriptions.length - 1))
 			nextDesc.setVisible(false);
 		if(currentDescription > 0)
 			prevDesc.setVisible(true);
-		dexcription.setText(descriptions[currentDescription]);
+		setDescriptions();
     }//GEN-LAST:event_nextDescMouseClicked
 
     private void prevDescMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_prevDescMouseClicked
-        currentDescription -= 1;
+        c--;
+		currentDescription -= 1;
 		if(currentDescription == 0)
 			prevDesc.setVisible(false);
 		nextDesc.setVisible(true);
 		dexcription.setText(descriptions[currentDescription]);
+		setDescriptions();
     }//GEN-LAST:event_prevDescMouseClicked
 
-    private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
+    private void poke1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_poke1MouseClicked
         current = index;
 		setPokeDesc();
 		cl.show(jPanel1, "Info view");
-    }//GEN-LAST:event_jPanel5MouseClicked
+    }//GEN-LAST:event_poke1MouseClicked
 
-    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+    private void backToInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backToInfoMouseClicked
         cl.show(jPanel1, "List view");
-    }//GEN-LAST:event_jLabel6MouseClicked
+    }//GEN-LAST:event_backToInfoMouseClicked
 
-    private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
+    private void poke2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_poke2MouseClicked
         current = index + 1;
 		setPokeDesc();
 		cl.show(jPanel1, "Info view");
-    }//GEN-LAST:event_jPanel6MouseClicked
+    }//GEN-LAST:event_poke2MouseClicked
 
-    private void jPanel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel13MouseClicked
+    private void poke3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_poke3MouseClicked
         current = index + 2;
 		setPokeDesc();
 		cl.show(jPanel1, "Info view");
-    }//GEN-LAST:event_jPanel13MouseClicked
+    }//GEN-LAST:event_poke3MouseClicked
 
-    private void jPanel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel15MouseClicked
+    private void poke4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_poke4MouseClicked
         current = index + 3;
 		setPokeDesc();
 		cl.show(jPanel1, "Info view");
-    }//GEN-LAST:event_jPanel15MouseClicked
+    }//GEN-LAST:event_poke4MouseClicked
 
-    private void jPanel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel17MouseClicked
+    private void poke5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_poke5MouseClicked
         current = index + 4;
 		setPokeDesc();
 		cl.show(jPanel1, "Info view");
-    }//GEN-LAST:event_jPanel17MouseClicked
+    }//GEN-LAST:event_poke5MouseClicked
 
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+    private void rotateBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rotateBtnMouseClicked
         rotated = !rotated;
 		try
 		{
@@ -932,9 +936,9 @@ public class mainWindow extends javax.swing.JFrame {
 					pokeSprite.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mainPackage/Images/sprites/"+Integer.parseInt(rs2.getString("DEXNO"))+".png")));
 		}
 		catch(SQLException e) {System.err.println(e.getMessage());}
-    }//GEN-LAST:event_jLabel3MouseClicked
+    }//GEN-LAST:event_rotateBtnMouseClicked
 
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+    private void shinyBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_shinyBtnMouseClicked
         shiny = !shiny;
 		try
 		{
@@ -949,7 +953,7 @@ public class mainWindow extends javax.swing.JFrame {
 					pokeSprite.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mainPackage/Images/sprites/"+Integer.parseInt(rs2.getString("DEXNO"))+".png")));
 		}
 		catch(SQLException e) {System.err.println(e.getMessage());}
-    }//GEN-LAST:event_jLabel2MouseClicked
+    }//GEN-LAST:event_shinyBtnMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1026,13 +1030,22 @@ public class mainWindow extends javax.swing.JFrame {
 			String pokeDescsSQL = "select pokedescriptionrb, pokedescriptiongold, pokedescriptionsilver, pokedescriptioncrystal, pokedescriptionruby, pokedescriptionsaphire, pokedescriptionemerald, pokedescriptiondiamond, pokedescriptionpearl, pokedescriptionplatinum, pokedescriptionhg, pokedescriptionss, pokedescriptionwhite, pokedescriptionblack, pokedescriptionw2, pokedescriptionx, pokedescriptiony, pokedescriptionor, pokedescriptionas, POKEDESCRIPTIONSUN, pokedescriptionmoon, pokedescriptionus, pokedescriptionum from main_puchamones where dexno = "+current;
             rs2 = state2.executeQuery(pokeInfoSQL);
             rs2.first();
-			pokeDescs.clear();
 			descs = stateD.executeQuery(pokeDescsSQL);
+			pokeDescs.clear();
 			descs.first();
 			
+			c = 0;
+			boolean cont = false;
 			for(int i = 1; i <= 23; i++)
+			{
+				if(!cont)
+					c++;
 				if(descs.getString(i) != null)
-					pokeDescs.add(descs.getString(i));
+				{
+					pokeDescs.add(descs.getString(i).trim());
+					cont=true;
+				}
+			}
 				
 			descriptions = pokeDescs.toArray(new String[0]);
 			
@@ -1227,12 +1240,106 @@ public class mainWindow extends javax.swing.JFrame {
                     pokeNo.setText("#0"+rs2.getString("DEXNO"));
             else
                 pokeNo.setText(rs2.getString("DEXNO"));
+			
+			setDescriptions();
         }
         catch(SQLException e) {System.err.println(e.getMessage());}
     }
 	public void setDescriptions()
 	{
+		if(descriptions[currentDescription].length() > 200)
+			dexcription.setFont(new java.awt.Font("Dialog", 0, 16));
+		else if(descriptions[currentDescription].length() > 135)
+			dexcription.setFont(new java.awt.Font("Dialog", 0, 19));
+		else
+			dexcription.setFont(new java.awt.Font("Dialog", 0, 22));
 		dexcription.setText(descriptions[currentDescription]);
+		switch(c)
+		{
+			case 1:
+				regionDex.setText("Pokémon Red / Blue");
+				break;
+				
+			case 2:
+				regionDex.setText("Pokémon Gold");
+				break;
+				
+			case 3:
+				regionDex.setText("Pokémon Silver");
+				break;
+				
+			case 4:
+				regionDex.setText("Pokémon Crystal");
+				break;
+			
+			case 5:
+				regionDex.setText("Pokémon Ruby");
+				break;
+				
+			case 6:
+				regionDex.setText("Pokémon Saphire");
+				break;
+				
+			case 7:
+				regionDex.setText("Pokémon Emerald");
+				break;
+				
+			case 8:
+				regionDex.setText("Pokémon Diamond");
+				break;
+				
+			case 9:
+				regionDex.setText("Pokémon Pearl");
+				break;
+				
+			case 10:
+				regionDex.setText("Pokémon Platinum");
+				break;
+				
+			case 11:
+				regionDex.setText("Pokémon Heart Gold");
+				break;
+				
+			case 12:
+				regionDex.setText("Pokémon Soul Silver");
+				break;
+				
+			case 13:
+				regionDex.setText("Pokémon White");
+				break;
+				
+			case 14:
+				regionDex.setText("Pokémon Black");
+				break;
+				
+			case 15:
+				regionDex.setText("Pokémon White/Black 2");
+				break;
+				
+			case 16:
+				regionDex.setText("Pokémon X");
+				break;
+				
+			case 17:
+				regionDex.setText("Pokémon Y");
+				break;
+				
+			case 18:
+				regionDex.setText("Pokémon Sun");
+				break;
+				
+			case 19:
+				regionDex.setText("Pokémon Moon");
+				break;
+				
+			case 20:
+				regionDex.setText("Pokémon Ultra Sun");
+				break;
+				
+			case 21:
+				regionDex.setText("Pokémon Ultra Moon");
+				break;
+		}
 	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1241,6 +1348,7 @@ public class mainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel PokeType2;
     private javax.swing.JLabel PokeTypeLabel1;
     private javax.swing.JLabel PokeTypeLabel2;
+    private javax.swing.JLabel backToInfo;
     private javax.swing.JTextArea dexcription;
     private javax.swing.JScrollPane dexcriptionContainer;
     private javax.swing.JLabel fifthPoke;
@@ -1254,41 +1362,40 @@ public class mainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel infoViewPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPanel listViewPanel;
     private javax.swing.JLabel nextDesc;
     private javax.swing.JLabel nextPokeInfo;
+    private javax.swing.JPanel poke1;
+    private javax.swing.JPanel poke2;
+    private javax.swing.JPanel poke3;
+    private javax.swing.JPanel poke4;
+    private javax.swing.JPanel poke5;
     private javax.swing.JLabel pokeNo;
     private javax.swing.JLabel pokeShape;
     private javax.swing.JLabel pokeSprite;
     private javax.swing.JLabel prevDesc;
     private javax.swing.JLabel prevPokeInfo;
+    private javax.swing.JLabel regionDex;
+    private javax.swing.JLabel rotateBtn;
     private javax.swing.JLabel secondPoke;
     private javax.swing.JLabel secondPokeImg;
+    private javax.swing.JLabel shinyBtn;
     private javax.swing.JLabel thirdPoke;
     private javax.swing.JLabel thirdPokeImg;
     // End of variables declaration//GEN-END:variables
